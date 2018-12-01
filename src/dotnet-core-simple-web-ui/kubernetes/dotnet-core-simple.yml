@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-core-simple
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-core-simple
+  template:
+    metadata:
+      labels:
+        app: dotnet-core-simple
+    spec:
+      containers:
+      - name: dotnet-core-simple
+        image: dcurrotto/dotnet-core-simple:3
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS
+          value: "azure-vote-back"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnet-core-simple
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: dotnet-core-simple

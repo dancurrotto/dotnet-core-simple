@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_core_simple_web_ui.Models;
+using dotnet_core_simple_web_ui.Helpers;
 
 namespace dotnet_core_simple_web_ui.Controllers
 {
@@ -12,7 +13,11 @@ namespace dotnet_core_simple_web_ui.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var secretHelper = new SecretHelper();
+            var homeModel = new HomeModel();
+            homeModel.Secret = secretHelper.FileContent;
+
+            return View(homeModel);
         }
 
         public IActionResult About()

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model dotnet_core_simple_web_ui.Models.HomeModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,12 +11,12 @@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">               
+            <div class="carousel-caption" role="option">
             </div>
         </div>
         <div class="item">
             <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">               
+            <div class="carousel-caption" role="option">
             </div>
         </div>
     </div>
@@ -33,7 +34,7 @@
     <div class="col-md-12">
         <h2>Secrets:</h2>
         <ul>
-            <li>shhhhh...</li>
+            <li>@Model.Secret</li>
         </ul>
     </div>
 </div>
