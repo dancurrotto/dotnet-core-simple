@@ -1,8 +1,8 @@
 Build the image:
- docker build -t dotnet-core-simple .
+    docker build -t dotnet-core-simple .
 
 Look at the images and copy the Image Id of the one tagged 'latest'
-docker images
+    docker images
 
 Tag the image using that Image Id and the next version:
 docker tag 7caf46f93c9a dcurrotto/dotnet-core-simple:9
