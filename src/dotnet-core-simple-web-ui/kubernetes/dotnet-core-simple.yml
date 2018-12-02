@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: dotnet-core-simple
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: dotnet-core-simple
@@ -14,11 +14,13 @@ spec:
     spec:
       containers:
       - name: dotnet-core-simple
-        image: dcurrotto/dotnet-core-simple:7
+        image: dcurrotto/dotnet-core-simple:9
         volumeMounts:
           # name must match the volume name below
-          - name: secrets-x
-            mountPath: /app/secrets-x
+          - name: secret-volume
+            mountPath: /app/Configuration/Secrets
+          - name: config-map-volume
+            mountPath: /app/Configuration/ConfigMaps
         resources:
           requests:
             cpu: 100m
@@ -30,12 +32,15 @@ spec:
         - containerPort: 80
         env:
         - name: CONFIG_VERSION
-          value: "3"
+          value: "2"
        # The secret data is exposed to Containers in the Pod through a Volume.
       volumes:
-        - name: secrets-x
+        - name: secret-volume
           secret:
             secretName: secret-appsettings    
+        - name: config-map-volume
+          configMap:
+            name: config-map-appsettings    
 ---
 apiVersion: v1
 kind: Service

@@ -21,9 +21,13 @@ namespace dotnet_core_simple_web_ui.Controllers
 
         public IActionResult Index()
         {
-            var secretHelper = new SecretHelper(_configuration);
             var homeModel = new HomeModel();
+
+            var secretHelper = new SecretHelper(_configuration);            
             homeModel.Secret = secretHelper.SecretContent;
+
+            var configMapHelper = new ConfigMapHelper(_configuration);
+            homeModel.ClientId = configMapHelper.ConfigMapContent;
 
             return View(homeModel);
         }

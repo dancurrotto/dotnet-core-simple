@@ -24,7 +24,8 @@ namespace dotnet_core_simple_web_ui
                  .ConfigureAppConfiguration((hostingContext, config) =>
                  {
                      config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                             .AddJsonFile("secrets-x/appsettings.secrets.json", optional: true, reloadOnChange: true);                    
+                             .AddJsonFile("Configuration/Secrets/appsettings.secrets.json", optional: true, reloadOnChange: true)
+                             .AddJsonFile("Configuration/ConfigMaps/appsettings.configmaps.json", optional: true, reloadOnChange: true);                    
                  })
                 .Build();
     }

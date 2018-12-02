@@ -19,7 +19,7 @@ namespace dotnet_core_simple_web_ui.Helpers
         public SecretHelper(IConfiguration configuration)
         {
             _secretContent 
-                = configuration.GetSection("IdentityProvider").GetSection("Secret").Value;
+                = configuration.GetSection("Secrets").GetSection("IdentityProviderSecret").Value;
         }
     }
 }
