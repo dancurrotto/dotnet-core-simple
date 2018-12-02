@@ -22,7 +22,7 @@ Create the secret:
 
     kubectl create secret generic secret-appsettings --from-file=./configuration/Secrets/appsettings.secrets.json
 
-Delete the configMap(assuming it's already there):
+Delete the configMap (assuming it's already there):
 
     kubectl delete configmap config-map-appsettings
 
@@ -40,13 +40,13 @@ Take a look at the services and wait until you see the EXTERNAL-IP come up on th
 
 Grab the external IP and pop it in the browser.  The app should come up and you should see your Secret and ClientId.
 
-Grab the pod:
+Grab a pod:
     
     kubectl get pod
 
 and:
 
-ssh into a node using Kubectl to look around:
+Using that pod ssh into a node using Kubectl to look around:
     
     kubectl exec -it dotnet-core-simple-549cbb9855-lsldk -- /bin/bash
 
@@ -67,5 +67,5 @@ Run through again:
     
     Apply the deployment.
     
-    You should see the updated values.
+    You should see the updated values in the web ui.
     
