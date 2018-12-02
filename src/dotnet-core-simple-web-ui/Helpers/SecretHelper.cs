@@ -1,34 +1,25 @@
-﻿using System.IO;
+﻿using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace dotnet_core_simple_web_ui.Helpers
 {
     public class SecretHelper
     {
-        public string _fileContent;
+       
+        public string _secretContent;
 
-        public string FileContent
+        public string SecretContent
         {
             get
             {
-                return _fileContent;
+                return _secretContent;
             }
         }
 
-        public SecretHelper()
+        public SecretHelper(IConfiguration configuration)
         {
-            if(!File.Exists("secret"))
-            {
-               using (StreamWriter file =
-               new System.IO.StreamWriter("secret", true))
-                {
-                   
-                }
-            }
-
-            using (StreamReader sr = new StreamReader("secret"))
-            {
-                _fileContent = sr.ReadToEnd();
-            }
+            _secretContent 
+                = configuration.GetSection("IdentityProvider").GetSection("Secret").Value;
         }
     }
 }

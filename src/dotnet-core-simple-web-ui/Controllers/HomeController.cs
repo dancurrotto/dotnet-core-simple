@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_core_simple_web_ui.Models;
 using dotnet_core_simple_web_ui.Helpers;
+using Microsoft.Extensions.Configuration;
 
 namespace dotnet_core_simple_web_ui.Controllers
 {
     public class HomeController : Controller
     {
+        IConfiguration _configuration;
+
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public IActionResult Index()
         {
-            var secretHelper = new SecretHelper();
+            var secretHelper = new SecretHelper(_configuration);
             var homeModel = new HomeModel();
-            homeModel.Secret = secretHelper.FileContent;
+            homeModel.Secret = secretHelper.SecretContent;
 
             return View(homeModel);
         }
