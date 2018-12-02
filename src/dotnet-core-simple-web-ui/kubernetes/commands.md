@@ -1,14 +1,15 @@
-Log into the azure cli
+Log into the azure cli:
  
  az login
 
-Manually create a service principal
+Manually create a service principal:
 
     az ad sp create-for-rbac --skip-assignment
 
-Grab the appId and password out of the JSON that is displayed>
+Grab the appId and password out of the JSON that is displayed:
 
 Get the credentials and merge them into the current context:
+    
     az aks get-credentials --resource-group [resource group] --name [cluster name] --overwrite-existing
 
 Clone the repo and navigate to it.
