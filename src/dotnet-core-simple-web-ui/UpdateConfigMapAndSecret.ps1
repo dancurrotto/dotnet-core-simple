@@ -1,20 +1,19 @@
 ﻿Param
 (
-    [Parameter(Mandatory=$true)]
-    [string]$IdentityProviderSecret
+    [Parameter(Mandatory=$true)] [string]$IdentityProviderSecret, [Parameter(Mandatory=$true)] [string]$DropFolder
 )
-write-host $IdentityProviderSecret
+write-host "IdentityProviderSecret: $IdentityProviderSecret"
 
-$dropFolder = "$(System.DefaultWorkingDirectory)/_dotnet-core-simple-build/drop/"
+write-host "DropFolder: $DropFolder"
 
-$configMapPath = "$dropFolder/Configuration/ConfigMaps/appsettings.configmaps.json"
+$configMapPath = "$DropFolder/Configuration/ConfigMaps/appsettings.configmaps.json"
 $configMapJson = Get-Content $configMapPath | ConvertFrom-Json
 $now = Get-Date
 $configMapJson.ConfigMaps.IdentityProviderClientId = -join("configMap", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
 $configMapJson | ConvertTo-Json | set-content $configMapPath
 
 
-$secretPath = "$dropFolder/Configuration/Secrets/appsettings.secrets.json"
+$secretPath = "$DropFolder/Configuration/Secrets/appsettings.secrets.json"
 $secretJson = Get-Content $secretPath | ConvertFrom-Json
 $now = Get-Date
 $secretJson.Secrets.IdentityProviderSecret = -join("$IdentityProviderSecret", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
