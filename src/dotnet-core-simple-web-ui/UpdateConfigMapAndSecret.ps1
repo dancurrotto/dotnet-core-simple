@@ -1,4 +1,8 @@
-﻿
+﻿Param
+(
+    [Parameter(Mandatory=$true)]
+    [string]$IdentityProviderSecret
+)
 
 $configMapPath = "./Configuration/ConfigMaps/appsettings.configmaps.json"
 $configMapJson = Get-Content $configMapPath | ConvertFrom-Json
@@ -10,7 +14,7 @@ $configMapJson | ConvertTo-Json | set-content $configMapPath
 $secretPath = "./Configuration/Secrets/appsettings.secrets.json"
 $secretJson = Get-Content $secretPath | ConvertFrom-Json
 $now = Get-Date
-$secretJson.Secrets.IdentityProviderSecret = -join("secret", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
+$secretJson.Secrets.IdentityProviderSecret = -join("$IdentityProviderSecret", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
 $secretJson | ConvertTo-Json | set-content $secretPath
 
 
