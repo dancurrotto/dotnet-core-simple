@@ -3,7 +3,8 @@
     [Parameter(Mandatory=$true)]
     [string]$IdentityProviderSecret
 )
-
+write-host $IdentityProviderSecret
+<#
 $configMapPath = "./Configuration/ConfigMaps/appsettings.configmaps.json"
 $configMapJson = Get-Content $configMapPath | ConvertFrom-Json
 $now = Get-Date
@@ -16,6 +17,6 @@ $secretJson = Get-Content $secretPath | ConvertFrom-Json
 $now = Get-Date
 $secretJson.Secrets.IdentityProviderSecret = -join("$IdentityProviderSecret", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
 $secretJson | ConvertTo-Json | set-content $secretPath
-
+#>
 
 
