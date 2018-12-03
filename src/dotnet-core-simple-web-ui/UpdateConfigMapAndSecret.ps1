@@ -5,14 +5,16 @@
 )
 write-host $IdentityProviderSecret
 
-$configMapPath = "./Configuration/ConfigMaps/appsettings.configmaps.json"
+$dropFolder = "$(System.DefaultWorkingDirectory)/_dotnet-core-simple-build/drop/"
+
+$configMapPath = "$dropFolder/Configuration/ConfigMaps/appsettings.configmaps.json"
 $configMapJson = Get-Content $configMapPath | ConvertFrom-Json
 $now = Get-Date
 $configMapJson.ConfigMaps.IdentityProviderClientId = -join("configMap", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
 $configMapJson | ConvertTo-Json | set-content $configMapPath
 
 
-$secretPath = "./Configuration/Secrets/appsettings.secrets.json"
+$secretPath = "$dropFolder/Configuration/Secrets/appsettings.secrets.json"
 $secretJson = Get-Content $secretPath | ConvertFrom-Json
 $now = Get-Date
 $secretJson.Secrets.IdentityProviderSecret = -join("$IdentityProviderSecret", " ", $now.ToUniversalTime().ToString('HH:mm:ss'))
