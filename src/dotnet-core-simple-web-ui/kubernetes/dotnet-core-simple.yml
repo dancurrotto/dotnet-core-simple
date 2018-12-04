@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dotnet-core-simple
-        image: dcurrotto/dotnet-core-simple:29
+        image: dcurrotto/dotnet-core-simple
         volumeMounts:
           # name must match the volume name below
           - name: secret-volume
