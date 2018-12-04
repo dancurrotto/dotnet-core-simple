@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dotnet-core-simple
-        image: dcurrotto/dotnet-core-simple:56
+        image: dcurrotto/dotnet-core-simple:55
         volumeMounts:
           # name must match the volume name below
           - name: secret-volume
@@ -32,7 +32,7 @@ spec:
         - containerPort: 80
         env:
         - name: CONFIG_VERSION
-          value: "2"
+          value: "1"
        # The secret data is exposed to Containers in the Pod through a Volume.
       volumes:
         - name: secret-volume
