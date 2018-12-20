@@ -2,8 +2,19 @@ pipeline {
 
     agent {
         dockerfile true
-    }     
+    }   
 
+
+    stages {
+
+        stage('Example'){
+            steps {
+                sh 'echo myCustomEnvVar = $myCustomEnvVar'
+            } 
+        }
+    }
+}     
+/*
      environment {
 
                 WORKSPACE=pwd()
@@ -11,6 +22,7 @@ pipeline {
                 ETAG=''
 
     }
+
 
     stages {
 
@@ -86,4 +98,4 @@ pipeline {
 
     }
 
-}
+}*/
