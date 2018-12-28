@@ -32,7 +32,7 @@ pipeline {
 
                 // sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub --state s3://valuesource-kubernetes'
 
-                sh 'node { try { error "Test error" } catch (ex) { echo "Error handled" } }'
+                sh '''node { try { error \\"Test error\\" } catch (ex) { echo \\"Error handled\\" } }'''
                 sh 'echo Tell kops where to find its config and state.'
                 sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
 
