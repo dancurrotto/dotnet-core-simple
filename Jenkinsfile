@@ -25,10 +25,10 @@ pipeline {
                 sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
                 
                 sh 'echo Configuring AWS...'
-                sh '~/.local/bin/aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
-                sh '~/.local/bin/aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
-                sh '~/.local/bin/aws configure set region us-east-2'
-                sh '~/.local/bin/aws configure set output json'                 
+                sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                sh 'aws configure set region us-east-2'
+                sh 'aws configure set output json'                 
                 
                 // sh 'kubectl apply -f deployment.yaml'
                
