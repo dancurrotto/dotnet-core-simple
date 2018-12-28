@@ -19,6 +19,7 @@ pipeline {
                 
                 sh 'echo $WORKSPACE'
                 sh 'echo $AWS_ACCESS_KEY_ID'
+                /*
                 sh 'echo $PATH'   
                 
                 sh 'echo Tell kops where to find its config and state.'
@@ -29,7 +30,7 @@ pipeline {
                 sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
                 sh 'aws configure set region us-east-2'
                 sh 'aws configure set output json'                 
-                
+                */
                 // sh 'kubectl apply -f deployment.yaml'
                
                 // sh 'kubectl run my-nginx --image=nginx --replicas=1 --port=80'
