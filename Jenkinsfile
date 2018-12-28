@@ -35,9 +35,9 @@ pipeline {
                 sh 'echo Tell kops where to find its config and state.'
                 sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
 
-                // sh 'kops validate cluster --name value-source-cloud.com --state s3://valuesource-kubernetes'
+                sh 'kops validate cluster --name value-source-cloud.com --state s3://valuesource-kubernetes'
                 
-                sh 'kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes'
+                // sh 'kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes'
 
                 
                 // sh 'kubectl apply -f deployment.yaml'
