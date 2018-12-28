@@ -1,10 +1,9 @@
 pipeline {
 
     agent {
-        agent any // dockerfile true
-    }     
-
-     environment {
+        agent any
+     
+        environment {
 
                 WORKSPACE=pwd()
 
