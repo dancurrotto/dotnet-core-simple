@@ -22,17 +22,18 @@ pipeline {
               
                 sh 'echo $PATH'   
                 
-                sh 'echo Tell kops where to find its config and state.'
-                sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
-                
+               
                 sh 'echo Configuring AWS...'
                 sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
                 sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
                 sh 'aws configure set region us-east-2'
                 sh 'aws configure set output json'   
 
-                sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub --state s3://valuesource-kubernetes'
+                // sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub --state s3://valuesource-kubernetes'
 
+                sh 'echo Tell kops where to find its config and state.'
+                sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
+                
                 sh 'kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes'
 
                 
