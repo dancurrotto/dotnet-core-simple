@@ -55,7 +55,7 @@ metadata:
   name: master-us-east-2a
 spec:
   image: kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2018-08-17
-  machineType: m4.large
+  machineType: m4.xlarge
   maxSize: 1
   minSize: 1
   nodeLabels:
@@ -83,24 +83,3 @@ spec:
   role: Node
   subnets:
   - us-east-2a
-
----
-
-apiVersion: kops/v1alpha2
-kind: InstanceGroup
-metadata:
-  creationTimestamp: null
-  labels:
-    kops.k8s.io/cluster: value-source-cloud.com
-  name: nodes
-spec:
-  image: kope.io/k8s-1.6-debian-jessie-amd64-hvm-ebs-2018-08-17
-  machineType: m4.large
-  maxSize: 1
-  minSize: 1
-  nodeLabels:
-    kops.k8s.io/instancegroup: nodes
-  role: Node
-  subnets:
-  - us-east-2a
-
