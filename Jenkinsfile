@@ -4,6 +4,9 @@ pipeline {
      environment {
                 WORKSPACE=pwd()
                 ETAG=''
+                KOPS_STATE_STORE="s3://valuesource-kubernetes"
+                CLUSTER_NAME="value-source-cloud.com"
+
     }
     stages {
         stage('Build'){
@@ -34,7 +37,7 @@ pipeline {
 
                 // sh '''node { try { error \\"Test error\\" } catch (ex) { echo \\"Error handled\\" } }'''
                 sh 'echo Tell kops where to find its config and state.'
-                sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
+                // sh 'export KOPS_STATE_STORE=s3://valuesource-kubernetes'
 
                 // sh 'kops validate cluster --name value-source-cloud.com --state s3://valuesource-kubernetes > clusterFile'
                 
@@ -42,10 +45,10 @@ pipeline {
 
                 //********************************************************************
                 // This is the name of the cluster and the manifest file.
-                sh 'export NAME=value-source-cloud.com'
+                // sh 'export NAME=value-source-cloud.com'
 
-                sh 'kops create -f $NAME.yaml --state s3://valuesource-kubernetes'
-                sh 'kops update cluster $NAME --yes'
+                sh 'kops create -f $NAME.yaml --state $KOPS_STATE_STORE'
+                sh 'kops update cluster $CLUSTER_NAME --yes'
 
 
                 // This is the statement that created the cluster.
