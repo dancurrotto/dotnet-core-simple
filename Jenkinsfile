@@ -38,11 +38,11 @@ pipeline {
                
                 //********************************************************************
 
-                //                  sh 'kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE'
+                sh 'kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE'
 
 
                 // sh 'kops replace -f $CLUSTER_NAME.yaml'
-                sh 'kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes'
+                // sh 'kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes'
                 // sh 'kops rolling-update cluster $CLUSTER_NAME --yes'
 
 
