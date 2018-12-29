@@ -38,9 +38,22 @@ pipeline {
 
                 // sh 'kops validate cluster --name value-source-cloud.com --state s3://valuesource-kubernetes > clusterFile'
                 
-                sh 'kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes'
+                // sh 'kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes'
 
-                
+                //********************************************************************
+                // This is the name of the cluster and the manifest file.
+                sh 'export NAME=value-source-cloud.com'
+
+                sh 'kops update cluster $NAME --yes'
+
+
+                // This is the statement that created the cluster.
+                // sh 'kops create cluster $NAME --zones us-east-2a --node-count 1 --node-size m4.large --kubernetes-version v1.6.6 --master-size m4.large --dry-run -o yaml > $NAME.yaml'
+                //*********************************************************************
+
+
+
+
                 // sh 'kubectl apply -f deployment.yaml'
                
                 // sh 'kubectl run my-nginx --image=nginx --replicas=1 --port=80'
