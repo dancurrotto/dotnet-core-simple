@@ -47,7 +47,7 @@ pipeline {
                 // This is the name of the cluster and the manifest file.
                 // sh 'export NAME=value-source-cloud.com'
 
-                sh 'kops create -f $NAME.yaml --state $KOPS_STATE_STORE'
+                sh 'kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE'
                 sh 'kops update cluster $CLUSTER_NAME --yes'
 
 
