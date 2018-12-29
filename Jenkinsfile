@@ -38,12 +38,25 @@ pipeline {
                
                 //********************************************************************
 
+                ///Create:
+                /*
                 sh 'kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE'
-
                 sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub'
-                // sh 'kops replace -f $CLUSTER_NAME.yaml'
                 sh 'kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes'
-                // sh 'kops rolling-update cluster $CLUSTER_NAME --yes'
+                */
+                
+                ///Update:
+                sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub'
+                sh 'kops replace -f $CLUSTER_NAME.yaml'
+                sh 'kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes'
+                sh 'kops rolling-update cluster $CLUSTER_NAME --yes'
+
+
+               
+
+
+
+
 
 
                 // This is the statement that created the cluster.
