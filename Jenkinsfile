@@ -26,13 +26,13 @@ pipeline {
                 sh 'echo $PATH'   
             
                 
-               /*
+               
                 sh 'echo Configuring AWS...'
                 sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
                 sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
                 sh 'aws configure set region us-east-2'
                 sh 'aws configure set output json'   
-                */
+                
                 
                 sh 'echo Tell kops where to find its config and state.'
                
