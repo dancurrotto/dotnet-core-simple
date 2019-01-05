@@ -40,6 +40,8 @@ ValidateCluster
 
 RETURN_VALUE=$? 
 
+echo "RETURN_VALUE is: $RETURN_VALUE"
+
 if [ $RETURN_VALUE -eq 1 ]
 then    
     echo "****************************"
@@ -49,7 +51,8 @@ then
     kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE
     kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub
     kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes
-else
+elif [ $RETURN_VALUE -eq 0 ]
+then
     echo "****************************"
     echo "****************************"
     echo "updating the cluster..."
