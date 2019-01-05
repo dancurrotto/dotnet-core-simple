@@ -56,6 +56,9 @@ else
     kops replace -f $CLUSTER_NAME.yaml
     kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes
     kops rolling-update cluster $CLUSTER_NAME --yes
+
+    echo "running kubectl apply..."
+    sh 'kubectl apply -f src/dotnet-core-simple-web-ui/kubernetes/dotnet-core-simple.yml'
 fi
 
 echo $RETURN_VALUE
