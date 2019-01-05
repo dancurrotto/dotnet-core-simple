@@ -8,7 +8,6 @@ echo "****************************"
 # Define variables
 AWS_ACCESS_KEY_ID=$1
 AWS_SECRET_ACCESS_KEY=$2
-KOPS_STATE_STORE=$3
 REGION="us-east-2"
 OUTPUT="json"
 
@@ -27,10 +26,6 @@ elif [ -z $AWS_SECRET_ACCESS_KEY ]
 then
     echo "Please pass the AWS_SECRET_ACCESS_KEY."
     exit 2
-elif [ -z $KOPS_STATE_STORE ]
-then
-    echo "Please pass the KOPS_STATE_STORE."
-    exit 2
 fi
 
 echo Configuring AWS...
@@ -38,6 +33,8 @@ aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
 aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 aws configure set region $REGION
 aws configure set output $OUTPUT
+
+export KOPS_STATE_STORE=s3://valuesource-kubernetes
 
 ValidateCluster
 
