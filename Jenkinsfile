@@ -30,7 +30,9 @@ pipeline {
 
 
                 // Call the manageClusterWithKops script.
-                sh 'chmod +x ./manageClusterWithKops.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY'
+                sh 'chmod +x ./manageClusterWithKops.sh'
+
+                sh './manageClusterWithKops.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY'
                
                 sh 'echo Continuing...'           
                 
