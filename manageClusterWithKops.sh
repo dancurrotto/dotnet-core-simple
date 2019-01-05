@@ -48,18 +48,13 @@ then
     echo "****************************"
     echo "creating the cluster..."
     echo "This is the original creation of a non-existing cluster.  Re-run pipeline after cluster is created."
-    kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE
-    kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub
-    kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes
+    echo "Use kops validate cluster --name value-source-cloud.com --state s3://valuesource-kubernetes to validate."
+    kops create cluster --name value-source-cloud.com --state s3://valuesource-kubernetes --zones us-east-2a --node-count=1 --yes
 elif [ $RETURN_VALUE -eq 0 ]
 then
     echo "****************************"
     echo "****************************"
-    echo "updating the cluster..."
-    kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub
-    kops replace -f $CLUSTER_NAME.yaml
-    kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes
-    kops rolling-update cluster $CLUSTER_NAME --yes
+    echo "The cluster already exists.  Let's apply kubectl..."
 
     echo "running kubectl apply..."
     kubectl apply -f src/dotnet-core-simple-web-ui/kubernetes/dotnet-core-simple.yml
