@@ -27,6 +27,10 @@ elif [ -z $AWS_SECRET_ACCESS_KEY ]
 then
     echo "Please pass the AWS_SECRET_ACCESS_KEY."
     exit 2
+elif [ -z $KOPS_STATE_STORE ]
+then
+    echo "Please pass the KOPS_STATE_STORE."
+    exit 2
 fi
 
 echo Configuring AWS...
