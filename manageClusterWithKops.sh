@@ -1,9 +1,14 @@
 #!/bin/sh
+echo "****************************"
+echo "****************************"
 echo "Managing clusters with Kops"
+echo "****************************"
+echo "****************************"
 
 # Define variables
 AWS_ACCESS_KEY_ID=$1
 AWS_SECRET_ACCESS_KEY=$2
+KOPS_STATE_STORE=$3
 REGION="us-east-2"
 OUTPUT="json"
 
@@ -36,11 +41,15 @@ RETURN_VALUE=$?
 
 if [ $RETURN_VALUE -eq 1 ]
 then    
+    echo "****************************"
+    echo "****************************"
     echo "creating the cluster..."
     kops create -f $CLUSTER_NAME.yaml --state $KOPS_STATE_STORE
     kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub
     kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes
 else
+    echo "****************************"
+    echo "****************************"
     echo "updating the cluster..."
     kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub
     kops replace -f $CLUSTER_NAME.yaml
