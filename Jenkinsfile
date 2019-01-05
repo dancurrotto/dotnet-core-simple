@@ -23,8 +23,7 @@ pipeline {
                 sh 'echo $WORKSPACE'
                 sh 'echo $AWS_ACCESS_KEY_ID'
               
-                sh 'echo $PATH'   
-            
+                sh 'echo $PATH'            
                 
                
                 sh 'echo Configuring AWS...'
@@ -32,6 +31,11 @@ pipeline {
                 sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
                 sh 'aws configure set region us-east-2'
                 sh 'aws configure set output json'   
+
+                // Call the manageClusterWithKops script.
+                sh './manageClusterWithKops.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY'
+               
+                sh 'echo Continuing...'           
                 
                 
                 sh 'echo Tell kops where to find its config and state.'
@@ -46,18 +50,14 @@ pipeline {
                 */
                 
                 ///Update:
+                /*
                 sh 'kops create secret --name value-source-cloud.com sshpublickey admin -i ~/.ssh/id_rsa.pub'
                 sh 'kops replace -f $CLUSTER_NAME.yaml'
                 sh 'kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE --yes'
                 sh 'kops rolling-update cluster $CLUSTER_NAME --yes'
-
+                 */
 
                
-
-
-
-
-
 
                 // This is the statement that created the cluster.
                 // sh 'kops create cluster $NAME --zones us-east-2a --node-count 1 --node-size m4.large --kubernetes-version v1.6.6 --master-size m4.large --dry-run -o yaml > $NAME.yaml'
@@ -66,7 +66,7 @@ pipeline {
 
 
 
-                // sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f src/dotnet-core-simple-web-ui/kubernetes/dotnet-core-simple.yml'
                
                 // sh 'kubectl run my-nginx --image=nginx --replicas=1 --port=80'
                 
