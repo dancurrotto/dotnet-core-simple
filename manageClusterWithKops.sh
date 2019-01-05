@@ -57,7 +57,7 @@ then
     echo "The cluster already exists.  Let's apply kubectl..."
 
     echo "running kubectl apply..."
-    kubectl get
+    kubectl get node
     kubectl get service dotnet-core-simple
     kubectl apply -f src/dotnet-core-simple-web-ui/kubernetes/dotnet-core-simple.yml
 fi
